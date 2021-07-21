@@ -103,9 +103,9 @@ public class IncomeTaxService {
         {
             return 14220;
         }else if(age < 75)
-            return 7794;
+            return 7794 + 14220;
         else{
-            return 2601;
+            return 2601 + 7794 + 14220;
         }
     }
 
@@ -114,9 +114,9 @@ public class IncomeTaxService {
         {
             return 14958;
         }else if(age < 75)
-            return 8199;
+            return 8199 + 14958;
         else{
-            return 2736;
+            return 2736 + 8199 + 14958;
         }
     }
 
