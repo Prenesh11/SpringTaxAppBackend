@@ -1,5 +1,14 @@
 package com.incometax.domain;
 
+/**
+ * TaxFrequencyEnum, this enum contains the look up values tax frequencies
+ * and is used to make the code more readable
+ *
+ * @author  Prenesh Naidoo
+ * @version 1.0
+ * @since  2021
+ */
+
 public enum TaxFrequencyEnum {
 
     MONTHLY_TAX(1),

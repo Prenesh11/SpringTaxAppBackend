@@ -1,7 +1,15 @@
 package com.incometax.domain;
 
-public class IncomeTaxResponse {
+/**
+ * IncomeTaxResponse, this is one of the response formats and can be mapped to a relational db via JPA if required
+ *
+ * @author  Prenesh Naidoo
+ * @version 1.0
+ * @since  2021
+ */
 
+
+public class IncomeTaxResponse {
 
     private double taxPayableMonthlyBeforeCredit = 0.0;
     private double taxPayableAnnuallyBeforeCredit = 0.0;

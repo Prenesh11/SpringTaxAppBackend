@@ -5,6 +5,16 @@ import com.incometax.domain.IncomeTaxResponse;
 import com.incometax.domain.TaxFrequencyEnum;
 import org.springframework.stereotype.Service;
 
+/**
+ * IncomeTaxService, this service contains all the business knowledge of the tax calculator.
+ * These methods can be reduced when a Database is introduced to instead create a lookup for all
+ * the magic numbers in the code.
+ *
+ * @author  Prenesh Naidoo
+ * @version 1.0
+ * @since  2021
+ */
+
 @Service
 public class IncomeTaxService {
 

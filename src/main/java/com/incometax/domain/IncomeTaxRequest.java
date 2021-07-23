@@ -1,5 +1,13 @@
 package com.incometax.domain;
 
+/**
+ * IncomeTaxRequest, this is one of the expected request formats and can be mapped to a relational db via JPA if required
+ *
+ * @author  Prenesh Naidoo
+ * @version 1.0
+ * @since  2021
+ */
+
 public class IncomeTaxRequest {
 
  private int taxYear;

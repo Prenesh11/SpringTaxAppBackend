@@ -5,6 +5,16 @@ import com.incometax.domain.IncomeTaxResponse;
 import com.incometax.service.IncomeTaxService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * IncomeTaxController, this class is used as a central controller to expose all the service endpoint need
+ * for a customer.
+ *
+ * @author  Prenesh Naidoo
+ * @version 1.0
+ * @since  2021
+ */
+
+
 @RestController
 public class IncomeTaxController {
 
