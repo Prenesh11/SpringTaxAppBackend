@@ -3,16 +3,14 @@ package com.incometax.controller;
 import com.incometax.domain.IncomeTaxRequest;
 import com.incometax.domain.IncomeTaxResponse;
 import com.incometax.service.IncomeTaxService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class IncomeTaxController {
 
 
-    @RequestMapping(value = "calculateIncomeTax", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "calculateIncomeTax", produces="application/json", method = RequestMethod.POST)
     public IncomeTaxResponse calculateIncomeTax(@RequestBody IncomeTaxRequest incomeTaxRequest)
     {
         IncomeTaxService incomeTaxService = new IncomeTaxService();

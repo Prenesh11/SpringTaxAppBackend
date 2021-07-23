@@ -10,7 +10,18 @@ public class IncomeTaxService {
 
 
     public IncomeTaxResponse calculateTax(IncomeTaxRequest incomeTaxRequest) {
+
         IncomeTaxResponse incomeTaxResponse = new IncomeTaxResponse();
+
+        if(lessThanThreshold(incomeTaxRequest))
+        {
+            incomeTaxResponse.setNetCashPay(0);
+            incomeTaxResponse.setPayeDueAfterTaxCredit(0);
+            incomeTaxResponse.setTaxCredit(0);
+            incomeTaxResponse.setTaxPayableMonthlyBeforeCredit(0);
+            incomeTaxResponse.setTaxPayableAnnuallyBeforeCredit(0);
+            return incomeTaxResponse;
+        }
 
         incomeTaxResponse.setTaxPayableAnnuallyBeforeCredit(calculateTaxAmount(incomeTaxRequest));
         incomeTaxResponse.setTaxPayableMonthlyBeforeCredit(incomeTaxResponse.getTaxPayableAnnuallyBeforeCredit()/12);
@@ -29,6 +40,50 @@ public class IncomeTaxService {
         return incomeTaxResponse;
     }
 
+    private boolean lessThanThreshold(IncomeTaxRequest incomeTaxRequest) {
+
+        double annualIncome;
+        if(TaxFrequencyEnum.MONTHLY_TAX.getValue()==incomeTaxRequest.getTaxFrequency())
+        {
+            annualIncome = incomeTaxRequest.getTotalTaxableEarning() * 12;
+        }
+        else
+        {
+            annualIncome = incomeTaxRequest.getTotalTaxableEarning();
+        }
+
+        if(incomeTaxRequest.getTaxYear()==2021)
+        {
+            return calculate2021LessThanThreshold(incomeTaxRequest.getAge(), annualIncome);
+        }else{
+            return calculate2020LessThanThreshold(incomeTaxRequest.getAge(), annualIncome);
+        }
+    }
+
+    private boolean calculate2020LessThanThreshold(int age, double totalTaxableEarning) {
+        if(age<65 && totalTaxableEarning>79000)
+        {
+            return false;
+        }else if(age< 75 && totalTaxableEarning>122300){
+            return false;
+        }else if(age>= 75 && totalTaxableEarning>136750){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean calculate2021LessThanThreshold(int age, double totalTaxableEarning) {
+        if(age<65 && totalTaxableEarning>83100)
+        {
+            return false;
+        }else if(age<75 && totalTaxableEarning>128650){
+            return false;
+        }else if(age>= 75 && totalTaxableEarning>143850){
+            return false;
+        }
+        return true;
+    }
+
     private double calculateTaxCredit(IncomeTaxRequest incomeTaxRequest) {
 
         if(incomeTaxRequest.getTaxYear() == 2021)
@@ -39,11 +94,10 @@ public class IncomeTaxService {
             return calculateTaxCreditFor2020(incomeTaxRequest.getMedicalAidMainMemberAndDependants());
         }
 
-
     }
 
     private double calculateTaxCreditFor2021(int medicalAidMainMemberAndDependants) {
-        if(medicalAidMainMemberAndDependants == 0)
+        if(medicalAidMainMemberAndDependants <= 0)
         {
             return 0;
         }
@@ -59,7 +113,7 @@ public class IncomeTaxService {
     }
 
     private double calculateTaxCreditFor2020(int medicalAidMainMemberAndDependants) {
-        if(medicalAidMainMemberAndDependants == 0)
+        if(medicalAidMainMemberAndDependants <= 0)
         {
             return 0;
         }
